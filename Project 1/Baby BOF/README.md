@@ -21,7 +21,7 @@ First we can look at the babybof.c and see what we have:
   }
   ```
   
-It is obvious that `gets( buf)` is the key to overflow.
+It is obvious that `gets( buf )` is the key to overflow.
 
 For the next step, we will be to `objdump` to disassemble the program.
   
