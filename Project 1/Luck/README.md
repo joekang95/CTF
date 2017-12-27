@@ -49,7 +49,7 @@ So, the gap between a, b is 12 bytes (0xc), between b, c is 4 bytes (0x4), and b
 
 Therefore, our padding will need 12 bytes (0xc). b will be replaced with `0xfaceb00c`, c will be replaced with `0xdeadbeef`, and password replaced with can be anything we know.
 
-<b>Note: Remember to send `0xfaceb00c` and `0xdeadbeef` no string</b>
+<b>Note: Remember to send `0xfaceb00c` and `0xdeadbeef`, not string</b>
 
 In the end, our play load will be:
   
