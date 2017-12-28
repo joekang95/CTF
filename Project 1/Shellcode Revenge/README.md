@@ -82,7 +82,7 @@ So, the 6-byte shellcode will be:
     
 When `yuawn()` runs the shellcode it will start another read, which will look like `read(0, code, a large number)`. Therefore, we need to overwrite the original 6-byte shellcode with padding first, then follow up with the shellcod used in the previous question.
 
-In the end, the playload will look like:
+In the end, the payload will look like:
 
   ```python
   p.sendline(b"\x87\xf2\xff\xcf\x0f\x05"+ b"\x90"*6 +
