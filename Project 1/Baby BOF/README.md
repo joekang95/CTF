@@ -44,7 +44,7 @@ We also can see in `main` that `gets( buf )` starts to store to `-0x20(%rbp)` wh
 
 Therefore, our padding would be `0x28` bytes.
 
-In the end, our playload will be:
+In the end, our payload will be:
 
 ```Python
 b"A"*0x28 + p64(0x040064d)  
