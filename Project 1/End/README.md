@@ -80,7 +80,7 @@ So, since what we are entering is `/bin/sh\0` , an abosulute directory, `dfd` is
 
 Of course, it is easy since rsi is the starting point of the user input. Therefore our payload will begin with `/bin/sh\0` then follow up with a padding of 304 - 17 = 287 bytes. 
 
-    *   NOTE: rdx must be cleared since it is a parameter for execveat and in case of error.
+*   NOTE: rdx must be cleared since it is a parameter for `execveat` and in case of error.
     
 Seeing the note I wrote, yes, we need to zero out rdx. We can find the method at `0x400ed: xor rdx, rdx` and this will be our return address.
 
