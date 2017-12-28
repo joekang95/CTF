@@ -35,35 +35,57 @@ There is no `end.c` for us to see, so the only thing we can do is to `objdump` t
       400103:	48 81 c4 28 01 00 00 	add    $0x128,%rsp
       40010a:	c3                   	retq   
       
-  Wow....this problem is a pure assembly code problem.
+ Wow....this problem is a pure assembly code problem.
   
-  Everything is `xor`ed in the beginning so, all of them are 0.
+ Everything is `xor`ed in the beginning so, all of them are 0.
   
-  After every register is zeroed, it calls `end`.
+ After every register is zeroed, it calls `end`.
   
-  What `end` does is :
+ What `end` does is :
   
     * rsp = rsp - 0x128
     * rsi = rsp - 0x128
     * edx = rdx = 0x148
     * sycall
  
- And we can see `rax = 0` and `rdi = 0`, so `end` is a system call for `read()`.
+And we can see `rax = 0` and `rdi = 0`, so `end` is a system call for `read()`.
  
     end() = read(0, rsp - 0x128, 0x148)
     
- This is definitely a buffer overflow question.
+This is definitely a buffer overflow question.
  
- However, what can we do? I tried a lot to overflow, such as jumping back to read again, but failed.
+However, what can we do? I tried a lot to overflow, such as jumping back to read again, but failed.
  
- Then, when staring at `gdb-peda`, I found something interesting:
+Then, when staring at `gdb-peda`, I found something interesting:
  
    rax = the length of input string
    
- So, I tried to control the length to 59 to call `sys_execve` but still failed, since `/bin/sh\0` is not in rdi.
+So, I tried to control the length to 59 to call `sys_execve` but still failed, since `/bin/sh\0` is not in rdi.
  
- After that, I thought of: Maybe the input size is the key to solving this problem.
+After that, I thought of: Maybe the input size is the key to solving this problem.
  
- And.....vola! It is indeed!
+And.....vola! It is indeed!
  
- First 0x128 + 8 = 0x130 and 0x140 is our range of overflow. Converting them into decimal, they and 304 and 336. So, let's take a look at system call table at that range.
+First 0x128 + 8 = 0x130 and 0x140 is our range of overflow. Converting them into decimal, they and 304 and 336. So, let's take a look at system call table at that range.
+ 
+   ![end](end.jpg)
+   
+This look really alike `execve` so maybe this is it.
+
+After reading the `execveat manual`, I found this:
+
+   ![end2](end2.jpg)
+   
+So, since what we are entering is `/bin/sh\0` , an abosulute directory, `dfd` is ignored. This means, rdi is ignored and all we have to do is put `/bin/sh\0` in rsi.
+
+Of course, it is easy since rsi is the starting point of the user input. Therefore our payload will begin with `/bin/sh\0` then follow up with a padding of 304 - 17 = 287 bytes. 
+
+    *   NOTE: rdx must be cleared since it is a parameter for `execveat` and in case of error.
+    
+Seeing the note I wrote, yes, we need to zero out rdx. We can find the method at `0x400ed: xor rdx, rdx` and this will be our return address.
+
+Finally, our payload will be:
+
+```python
+   p.sendline(b"/bin//sh\x00" + b"\x90"*287 + p64(0x4000ed) + b"\x90"*17)
+```
