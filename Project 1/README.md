@@ -29,3 +29,9 @@
         git clone https://github.com/longld/peda.git ~/peda
         echo "source ~/peda/peda.py" >> ~/.gdbinit
       * https://github.com/longld/peda
+
+  * ROPgadget
+  
+        sudo pip install capstone
+        pip install ropgadget
+      * https://github.com/JonathanSalwan/ROPgadget
