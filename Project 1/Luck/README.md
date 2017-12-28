@@ -51,7 +51,7 @@ Therefore, our padding will need 12 bytes (0xc). b will be replaced with `0xface
 
 <b>Note: Remember to send `0xfaceb00c` and `0xdeadbeef`, not string</b>
 
-In the end, our play load will be:
+In the end, our payload will be:
   
 ```Python
 p.sendline(p32(0x11111111) + p32(0x11111111) + p32(0x11111111) +  p32(0xfaceb00c) + p32(0xdeadbeef) + p32(0x00000001))
