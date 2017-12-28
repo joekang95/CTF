@@ -85,12 +85,13 @@ And one import thing is to put `/bin/sh` into rdi, so, again, we need our ROPgad
 
 Later on....oh! There's one more thing if we look at `ret2libc.c` -- 
 
-    ```C
-    if( strlen( buf ) > 6 ) {
-        puts( "It could not > 6. If you want the flag, Over my dead body!!!!!" );
-        exit(0);
-    }
-    ``
+```C
+if( strlen( buf ) > 6 ) {
+    puts( "It could not > 6. If you want the flag, Over my dead body!!!!!" );
+    exit(0);
+}
+```
+
  Hmmmmmm....Length checking... how are we going to pass this and overflow?
  
 This has to do with a feature of string -- <b>end with `\x00` or `\0`</b>
