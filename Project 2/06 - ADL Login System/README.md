@@ -8,7 +8,7 @@ When seeing this, I thought of SQL injection.
 
 The most simple SQL injection is:
 
-	‘ or 1=1 -- 
+	' or 1=1 -- 
 	[b]Note: There's a space in the back[/b]
 
 So we input this in the username section and login....
