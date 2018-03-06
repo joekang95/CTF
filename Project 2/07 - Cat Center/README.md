@@ -43,7 +43,6 @@ But, the answer is ...... NO hints. So, let's look at the source code:
 And found a hint :
 
 ```php
-
 <div class="container">
     <ul>
         <li><a href="?mod=dl&file=cat_jump.jpg">cat_jump.jpg</a></li>
@@ -55,17 +54,13 @@ And found a hint :
         <!-- flag.php -->
     </ul>
 </div>
-
 ```
 Ok, so there's a file called `flag.php` and what should we do?
 
 We can see that this is a DOWNLOAD CENTER, and from the source code, we can see how those pictures were downloaded.
 
 ```php
-
 <a href="?mod=dl&file=XXX">
-
-
 ```
 
 Thus, let's give it a try by replaceing the file name with `flag.php`
@@ -75,11 +70,9 @@ And....it WORKS!!
 We got the file and saw the flag.
 
 ```php
-
 <?php
 $flag = "AD{d0wn1o4d_functi0n_Iz_veeryveeeery_D4NG3R}";
 ?>
-
 ```
 
 	
