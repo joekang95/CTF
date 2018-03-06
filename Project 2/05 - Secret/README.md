@@ -6,17 +6,17 @@ First, we can see that this is a simple webpage with two url links for us to cli
 
 So, let's look at the first link:
 
-![img2](Secret - Click Admin.JPG)
+![img2](Secret-Click Admin.JPG)
 
 Well...there's a waring picture saying "Hacker, you shall not pass!"
 
 And the current url looks like:
 
-![img3](Secret - Click Admin 2.JPG)
+![img3](Secret-Click Admin 2.JPG)
 
 Hence, the hint should be in the second link:
 
-![img4](Secret - Click this source sode.JPG)
+![img4](Secret-Click this source sode.JPG)
 
 Here, we can see that only if our address is local address could we pass the if statement.
 
