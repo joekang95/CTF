@@ -8,13 +8,8 @@ When seeing this, I thought of SQL injection.
 
 The most simple SQL injection is:
 
-<<<<<<< HEAD
 	' or 1=1 -- 
-	[b]Note: There's a space in the back[/b]
-=======
-	‘ or 1=1 -- 
 	**Note: There's a space in the back**
->>>>>>> 39f89e4bd6154dfd685ec6f15ecee13076bf57b0
 
 So we input this in the username section and login....
 
