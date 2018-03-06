@@ -9,7 +9,7 @@ When seeing this, I thought of SQL injection.
 The most simple SQL injection is:
 
 	' or 1=1 -- 
-	**Note: There's a space in the back**
+	**Note: There's a space at the back**
 
 So we input this in the username section and login....
 
