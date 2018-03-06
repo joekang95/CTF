@@ -42,7 +42,7 @@ But, the answer is ...... NO hints. So, let's look at the source code:
 
 And found a hint :
 
-```php
+```html
 <div class="container">
     <ul>
         <li><a href="?mod=dl&file=cat_jump.jpg">cat_jump.jpg</a></li>
@@ -59,7 +59,7 @@ Ok, so there's a file called `flag.php` and what should we do?
 
 We can see that this is a DOWNLOAD CENTER, and from the source code, we can see how those pictures were downloaded.
 
-```php
+```html
 <a href="?mod=dl&file=XXX">
 ```
 
