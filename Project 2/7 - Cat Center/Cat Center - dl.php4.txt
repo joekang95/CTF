@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cat Download Center</title>
+    
+	<style type="text/css">
+	body {
+		margin: 0;
+		background: url('bg.gif');
+		font-family: Helvetica, Arial, sans-serif;
+		color: white; 
+	}
+	.container {
+	    background: rgba(154, 154, 154, 0.9);
+	    padding: 1rem;
+	    margin: 1rem;
+	}
+	</style>
+</head>
+<body>
+    <h1>Cat Download System</h1>
+
+    <div class="container">
+        <ul>
+            <li><a href="?mod=dl&file=cat_jump.jpg">cat_jump.jpg</a></li>
+            <li><a href="?mod=dl&file=cat_lying.jpg">cat_lying.jpg</a></li>
+            <li><a href="?mod=dl&file=cat_peeking.jpg">cat_peeking.jpg</a></li>
+            <li><a href="?mod=dl&file=cat_shock.jpg">cat_shock.jpg</a></li>
+            <li><a href="?mod=dl&file=cat_sleeping.jpg">cat_sleeping.jpg</a></li>
+            <li><a href="?mod=dl&file=cat_vanilla_chocola.jpg">cat_vanilla_chocola.jpg</a></li>
+            <!-- flag.php -->
+        </ul>
+    </div>
+
+</body>
+</html>
